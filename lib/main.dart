@@ -4,10 +4,12 @@ import 'package:learning_text_recognition/learning_text_recognition.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,25 +17,28 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        primaryTextTheme: TextTheme(
+        primaryTextTheme: const TextTheme(
           headline6: TextStyle(color: Colors.white),
         ),
       ),
       home: ChangeNotifierProvider(
         create: (_) => TextRecognitionState(),
-        child: TextRecognitionPage(),
+        child: const TextRecognitionPage(),
       ),
     );
   }
+
 }
 
 class TextRecognitionPage extends StatefulWidget {
+  const TextRecognitionPage({super.key});
+
   @override
   _TextRecognitionPageState createState() => _TextRecognitionPageState();
 }
 
 class _TextRecognitionPageState extends State<TextRecognitionPage> {
-  TextRecognition? _textRecognition = TextRecognition();
+  final TextRecognition _textRecognition = TextRecognition();
 
   /* TextRecognition? _textRecognition = TextRecognition(
     options: TextRecognitionOptions.Japanese
@@ -41,7 +46,7 @@ class _TextRecognitionPageState extends State<TextRecognitionPage> {
 
   @override
   void dispose() {
-    _textRecognition?.dispose();
+    _textRecognition.dispose();
     super.dispose();
   }
 
@@ -51,7 +56,7 @@ class _TextRecognitionPageState extends State<TextRecognitionPage> {
     if (state.isNotProcessing) {
       state.startProcessing();
       state.image = image;
-      state.data = await _textRecognition?.process(image);
+      state.data = await _textRecognition.process(image);
       state.stopProcessing();
     }
   }
@@ -68,14 +73,14 @@ class _TextRecognitionPageState extends State<TextRecognitionPage> {
           if (state.isNotEmpty) {
             return Center(
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.8),
-                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(4.0)),
                 ),
                 child: Text(
                   state.text,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w500,
                   ),
                 ),
