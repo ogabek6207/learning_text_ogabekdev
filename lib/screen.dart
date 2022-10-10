@@ -10,6 +10,7 @@ class TextRecognitionPage extends StatefulWidget {
   _TextRecognitionPageState createState() => _TextRecognitionPageState();
 }
 
+
 class _TextRecognitionPageState extends State<TextRecognitionPage> {
   final TextRecognition _textRecognition = TextRecognition();
 
